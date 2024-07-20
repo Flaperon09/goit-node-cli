@@ -19,20 +19,22 @@ async function invokeAction({ action, id, name, email, phone }) {
     case "list":
       const contacts = await contactsOperations.listContacts();
       console.log("List of all contacts: ");
-      console.log(contacts);
+      console.table(contacts);
       break;
 
     case "get":
       // ... id
       const contact = await contactsOperations.getContactById(id);
-      console.log(`Contact by ID=${id}: `);
-      console.log(contact);
-
-      // Если продукт не найден, то вывести сообщение об ошибке
+    
+      // Если контакт не найден, то вывести сообщение об ошибке
       if (!contact) {
-        throw new Error(`Product with id=${id} not found`)
+        console.log(contact);
+        console.log(`Contact with id=${id} not found`);
+        break;
       };
 
+      console.log(`Contact by ID=${id}: `);
+      console.log(contact);
       break;
 
     case "add":
@@ -45,6 +47,14 @@ async function invokeAction({ action, id, name, email, phone }) {
     case "remove":
       // ... id
       const removeContact = await contactsOperations.removeContact(id);
+      
+      // Если контакт не найден, то вывести сообщение об ошибке
+      if (!removeContact) {
+        console.log(removeContact);
+        console.log(`Contact with id=${id} not found`);
+        break;
+      };
+
       console.log(`Contact by ID=${id} removed: `);
       console.log(removeContact);
       break;

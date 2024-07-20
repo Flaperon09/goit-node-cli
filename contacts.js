@@ -19,7 +19,7 @@ async function getContactById(contactId) {
 
   // Если результат не найден, то вернуть null
   if (!result) {
-      return null;
+    return null;
   };
     
   return result;

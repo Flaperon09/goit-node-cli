@@ -1,11 +1,7 @@
-const { contactsOperations } = require("./contacts"); // Импорт списка операций с контактами
-// console.log("Содержимое contactsOperations: ", contactsOperations);
-
-// const listContacts = require("./contacts");
+const { contactsOperations } = require("./contacts"); // Импорт функций работы с контактами
 
 const { program } = require("commander");
 
-// import { program } from "commander";
 program
   .option("-a, --action <type>", "choose action")
   .option("-i, --id <type>", "user id")
@@ -16,20 +12,20 @@ program
 program.parse(process.argv);
 
 const options = program.opts();
-// console.log(options);
 
 // TODO: рефакторити
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
       const contacts = await contactsOperations.listContacts();
-      // const contacts = await listContacts();
+      console.log("List of all contacts: ");
       console.log(contacts);
       break;
 
     case "get":
       // ... id
       const contact = await contactsOperations.getContactById(id);
+      console.log(`Contact by ID=${id}: `);
       console.log(contact);
 
       // Если продукт не найден, то вывести сообщение об ошибке
@@ -42,11 +38,15 @@ async function invokeAction({ action, id, name, email, phone }) {
     case "add":
       // ... name email phone
       const newContact = await contactsOperations.addContact(name, email, phone);
+      console.log("New contact added: ");
+      console.log(newContact);
       break;
 
     case "remove":
       // ... id
       const removeContact = await contactsOperations.removeContact(id);
+      console.log(`Contact by ID=${id} removed: `);
+      console.log(removeContact);
       break;
 
     default:
@@ -55,4 +55,3 @@ async function invokeAction({ action, id, name, email, phone }) {
 }
 
 const data = invokeAction(options);
-// console.log("Выполнение invokeAction: ", data);

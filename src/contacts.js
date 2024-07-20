@@ -1,4 +1,3 @@
-// const { clear } = require("console");
 const fs = require("fs/promises"); //Пакет работы с файлами
 const path = require("path"); // Пакет работы с путями
 const { v4 } = require("uuid"); // Импорт генератора случайных чисел "uuid"
@@ -57,9 +56,4 @@ const contactsOperations = {
   addContact
 };
 
-// module.export = contactsOperations;
-
-// module.export = listContacts();
-
-// exports.listContacts = listContacts;
 exports.contactsOperations = contactsOperations;
